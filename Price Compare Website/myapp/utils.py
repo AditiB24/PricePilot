@@ -160,44 +160,6 @@ def gadgetsnow(name):
     return gadgetsnow_price, gadgetsnow_name[0:50], gadgetsnow_image, gadgetsnow_link
 
 
-def croma(name):
-    try:
-        global flipkart
-        name1 = name.replace(" ", "+")
-        flipkart = f'https://www.shopsy.in/search?q={name1}&sid=tyy%2C4io&as=on&as-show=on&pageUID=1678557787075'
-        croma_link=flipkart
-        res = requests.get(
-            f'https://www.shopsy.in/search?q={name1}&sid=tyy%2C4io&as=on&as-show=on&pageUID=1678557787075',
-            headers=headers)
-
-        print("\nSearching in Shopsy....")
-        soup = BeautifulSoup(res.text, 'html.parser')
-
-        if (soup.select('.css-1dbjc4n.r-13awgt0.r-18u37iz.r-1w6e6rj.r-1f12yv3.r-kzbkwu.r-ttdzmv')):
-            # flipkart_name = soup.select('._3Djpdu')[0].getText().strip().upper()
-            # if name.upper() in flipkart_name:
-            croma_price = soup.select('.css-901oao.r-cqee49.r-1vgyyaa.r-ubezar.r-1rsjblm')[0].getText().strip()
-            croma_name = soup.select('._1PnKMA')[0].getText().strip()
-            print("Shopsy:")
-            print(croma_name)
-            print(croma_price)
-            print("---------------------------------")
-            croma_images = soup.find_all('img')[0]
-            croma_image = croma_images['src']
-
-        return croma_price, croma_name[0:50], croma_image, croma_link
-    except:
-        print("Shopsy: No product found!")
-        print("---------------------------------")
-        croma_price = '0'
-        croma_name = '0'
-        croma_image = '0'
-        croma_link = '0'
-    return croma_price, croma_name[0:50], croma_image, croma_link
-       
-
-
-
 def convert(a):
     b = a.replace(" ", '')
     c = b.replace("INR", '')
